@@ -26,6 +26,6 @@ def inspect_gpu():
 @app.local_entrypoint()
 def main(allow_cloud: bool = False):
     if not allow_cloud:
-        raise SystemExit("Cloud execution disabled; use --allow-cloud for an approved run.")
+        raise SystemExit("Cloud execution disabled; add --allow-cloud to run this check.")
     result = inspect_gpu.remote()
     print(result)

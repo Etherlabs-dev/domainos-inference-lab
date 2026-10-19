@@ -1,14 +1,17 @@
 # DomainOS inference lab
 
-Keep the historical experiment separate from new local validation. See docs/experiment-report.md and evidence/results.json.
+## Engineering
 
-- No deployment, cloud HTTP request, Modal run, GPU job, or app restart without explicit user approval for that run.
-- Never commit, push or publish without separate approval. Keep Git operations inside this repository.
-- Preserve `.private/` and `.history/`; they are excluded private originals, never publication inputs.
-- Never expose credentials, endpoint identity, home paths, raw logs or raw screenshots in docs or output.
-- Local validation: `python3 -m unittest discover -s tests -v`; `python3 scripts/audit_secrets.py`.
-- Update README and docs when behavior changes. Keep the Hugging Face float16 cloud model distinct from the local GGUF model.
+- Keep the local Unsloth GGUF path distinct from the cloud Hugging Face float16 path.
+- Run `python -m unittest discover -s tests -v` and `python scripts/audit_secrets.py` after changes.
+- Keep paid cloud execution behind explicit user approval. Deployment, GPU checks and authenticated readiness requests can activate billed compute.
+- Commit and push only the scope authorized by the user.
+- Preserve private originals and editor history. Keep `.private/`, `.history/`, credentials and raw recordings out of public commits.
 
-- Progressive drawing masters and recording materials live in the canonical content library at `youtube/domainos-managed-inference`. This repo carries final-state distribution snapshots and the pinned renderer only.
-- Match the handwritten Virgil/orange/charcoal tutorial style for diagrams; preserve source scenes and prior variants.
-- Keep local production drafts out of the public commit. Review the exact staged file list and audit it before every push.
+## Documentation and visuals
+
+- Write project documentation in my voice: explain what I built, show the result and link the evidence.
+- Keep technical constraints concise and tied to a concrete operating consequence.
+- Match the handwritten Virgil, orange and charcoal diagram style. Preserve editable sources and previous variants.
+- Keep the full progressive-reveal presentation and recording materials in the canonical tutorial library at `youtube/domainos-managed-inference`; this repository contains its engineering companion and final diagram states.
+- Review every screenshot individually. Use exact crops and opaque masks, preserve retained pixels, remove metadata, and check the actual export before staging.

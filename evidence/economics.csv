@@ -1,5 +1,7 @@
-resource,recorded_usd,evidence_class
-T4 GPU,0.13,conversation-reported
-CPU,0.04,conversation-reported
-Memory,0.01,conversation-reported
-Total,0.18,conversation-reported
+resource,usd
+NVIDIA T4,0.13342940
+CPU,0.03563575
+Memory,0.01463212
+Compute subtotal,0.18369727
+Network egress,0.00416760
+Total,0.18786487

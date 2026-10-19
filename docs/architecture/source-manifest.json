@@ -1,7 +1,7 @@
 {
-  "source_home": "Domain Intelligence Content Library / youtube/domainos-managed-inference",
+  "source_home": "docs/architecture/spec.json",
   "snapshot_date": "2026-10-19",
-  "purpose": "Reviewed final-state distribution copies; full production masters remain in the canonical library.",
+  "purpose": "Final diagram states for project documentation.",
   "files": [
     {
       "path": "roles.svg",
@@ -19,7 +19,7 @@
       "path": "roles.excalidraw",
       "source_section": "stages/01-roles/deck.json",
       "source_state": "01-roles-04",
-      "sha256": "ed68489417911b835119efee2741e3d5f7c9dc3035dee3af50630ffb31220972"
+      "sha256": "76163da0996097fad2bf577271d0ebb7c944e86045f3c6e023f86e660f7708ee"
     },
     {
       "path": "local.svg",
@@ -37,7 +37,7 @@
       "path": "local.excalidraw",
       "source_section": "stages/02-local/deck.json",
       "source_state": "02-local-04",
-      "sha256": "ee27d423b59a8c98333d9e53f44b86c45f6d17dd3d54c62dd4c6b20c6694b3bc"
+      "sha256": "34487ddc7f3957bbb595a03b97b930cc2deb56c5dcbe3861778a513b677c40e1"
     },
     {
       "path": "cloud.svg",
@@ -55,7 +55,7 @@
       "path": "cloud.excalidraw",
       "source_section": "stages/03-cloud/deck.json",
       "source_state": "03-cloud-04",
-      "sha256": "e188b29f02c86bed06e1979cedfb00822bb2fb0d5eab4cf8b8aa79eea8e2a605"
+      "sha256": "a0c53c4afc7d672133662d9bc683eb8d8fca278a2974e8535114588c18a39113"
     },
     {
       "path": "auth.svg",
@@ -73,25 +73,25 @@
       "path": "auth.excalidraw",
       "source_section": "stages/04-auth/deck.json",
       "source_state": "04-auth-04",
-      "sha256": "2e920330aa8fd969fd7b374e84fae43339145921d93cec1bb67d7d9099eaa819"
+      "sha256": "4c1cb987b683e9ee6f6de90d894bbf63a3a2597b3df8f51b3517f86755b2d2df"
     },
     {
       "path": "readiness.svg",
       "source_section": "stages/05-readiness/deck.json",
       "source_state": "05-readiness-04",
-      "sha256": "a8f6f63883837e26f2718ac5e511227f28218d4dc195a63a1104df8f67777e2d"
+      "sha256": "1a40b9fe47246b9dae2bb29dd4d8ac4a9ebd6a4110ade3fb57bae2b2777dd73a"
     },
     {
       "path": "readiness-light.svg",
       "source_section": "stages/05-readiness/deck.json",
       "source_state": "05-readiness-04",
-      "sha256": "75029de27e421a30955c99011fbf8287af20e8d96d4e8f5eaa58039257cc19db"
+      "sha256": "80f1187bf94e8f207141e435041b56a83f75dd7287a4b53bdb072c2ced10a298"
     },
     {
       "path": "readiness.excalidraw",
       "source_section": "stages/05-readiness/deck.json",
       "source_state": "05-readiness-04",
-      "sha256": "43d1223beb5ecf4884ba438bcb5718a157a68cbcbf695504e0dac5d4d6af3a77"
+      "sha256": "25d57b062384a51ddaa4064bab6db2840074650c79fc3a201446523ab1082358"
     },
     {
       "path": "economics.svg",
@@ -109,7 +109,7 @@
       "path": "economics.excalidraw",
       "source_section": "stages/06-economics/deck.json",
       "source_state": "06-economics-03",
-      "sha256": "51234c44730596a6f2514a15c203b17af645b4ac6231e5062e0d500e36dff986"
+      "sha256": "066eaefe51d59010c2470c35675681582cc61c22603d070025c3e2e78c0078e6"
     },
     {
       "path": "recap.svg",
@@ -127,7 +127,7 @@
       "path": "recap.excalidraw",
       "source_section": "stages/07-recap/deck.json",
       "source_state": "07-recap-03",
-      "sha256": "72c946758827cf158fa38627400726c9bcbd7723b6b7e36cf84618cb86d2249b"
+      "sha256": "918d369347a2e62dfd65cde92d53e63a6fbfca518d9d00c4fc796a2e7202257a"
     }
   ]
 }

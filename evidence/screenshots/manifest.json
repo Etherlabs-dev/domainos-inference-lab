@@ -1,0 +1,121 @@
+{
+  "experiment_date": "2026-10-19",
+  "screenshots": [
+    {
+      "file": "cloud-inference-auth.png",
+      "purpose": "Cloud HTTP 200, token usage, elapsed time and invalid-token HTTP 401",
+      "source_sha256": "7389af370039fb9690aeda5a56297fdb2f87d8794b3b99dfcd9de0084f963110",
+      "export_sha256": "8c35586e1ebda2136544ad07128ed5506690bf808e8039b2b5a4584fdd5372b5",
+      "source_size_px": [
+        2048,
+        1330
+      ],
+      "export_size_px": [
+        1670,
+        440
+      ],
+      "crop_xyxy": [
+        345,
+        540,
+        2015,
+        980
+      ],
+      "opaque_masks_xyxy": [
+        [
+          345,
+          919,
+          2015,
+          940
+        ],
+        [
+          345,
+          977,
+          2015,
+          980
+        ]
+      ],
+      "retained_pixels": "exact match outside masks",
+      "metadata": "removed",
+      "review": "visual inspection and local OCR passed"
+    },
+    {
+      "file": "resource-billing.png",
+      "purpose": "Hourly resource costs including network egress",
+      "source_sha256": "7389af370039fb9690aeda5a56297fdb2f87d8794b3b99dfcd9de0084f963110",
+      "export_sha256": "229a49f6188313396228a436e45f38848c35d314cef2466b905f9972c7b91c42",
+      "source_size_px": [
+        2048,
+        1330
+      ],
+      "export_size_px": [
+        475,
+        216
+      ],
+      "crop_xyxy": [
+        985,
+        1059,
+        1460,
+        1275
+      ],
+      "opaque_masks_xyxy": [],
+      "retained_pixels": "exact match outside masks",
+      "metadata": "removed",
+      "review": "visual inspection and local OCR passed"
+    },
+    {
+      "file": "t4-inspection.png",
+      "purpose": "NVIDIA T4 device and completed remote inspection",
+      "source_sha256": "40ec297a23e4a0bf3fb0de8984d748d399df6ed4a90a10e5041837bafb8e5a0e",
+      "export_sha256": "407e889e522e224e52941d13c759be0ae77ca8c728e0dfb811daf0575076a710",
+      "source_size_px": [
+        2048,
+        1330
+      ],
+      "export_size_px": [
+        875,
+        395
+      ],
+      "crop_xyxy": [
+        345,
+        850,
+        1220,
+        1245
+      ],
+      "opaque_masks_xyxy": [
+        [
+          775,
+          974,
+          955,
+          997
+        ]
+      ],
+      "retained_pixels": "exact match outside masks",
+      "metadata": "removed",
+      "review": "visual inspection and local OCR passed"
+    },
+    {
+      "file": "local-api-monitor.png",
+      "purpose": "Loaded Q4_K_M model, loopback API ready and successful local request",
+      "source_sha256": "8ca8b0df4eb860f8cd05279c5bed732841c8e10de65604bcaf2a55a0faa9a323",
+      "export_sha256": "7005402c6acfd41c253489180f330b269704394906f2c3b1364da537c3c533c4",
+      "source_size_px": [
+        2048,
+        1330
+      ],
+      "export_size_px": [
+        1530,
+        415
+      ],
+      "crop_xyxy": [
+        480,
+        150,
+        2010,
+        565
+      ],
+      "opaque_masks_xyxy": [],
+      "retained_pixels": "exact match outside masks",
+      "metadata": "removed",
+      "review": "visual inspection and local OCR passed"
+    }
+  ]
+}

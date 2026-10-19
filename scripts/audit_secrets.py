@@ -78,10 +78,12 @@ def main():
         if not p.is_file():continue
         count+=1
         # Manually authored SVG is source; raster screenshots still need pixel review.
+        raw=p.read_bytes()
         if p.suffix.lower() in ('.png','.jpg','.jpeg','.webp','.gif','.pdf','.mp4','.mov'):
-            findings.append({'file':str(rel),'line':None,'kind':'media_requires_manual_review'})
-            continue
-        findings+=scan(str(rel),p.read_bytes(),python=p.suffix=='.py',identifiers=not any(x in PRIVATE for x in rel.parts))
+            if hashlib.sha256(raw).hexdigest() not in REVIEWED_ASSET_HASHES:
+                findings.append({'file':str(rel),'line':None,'kind':'media_requires_manual_review'})
+                continue
+        findings+=scan(str(rel),raw,python=p.suffix=='.py',identifiers=not any(x in PRIVATE for x in rel.parts))
     blobs=set();index_count=0
     if (ROOT/'.git').exists():
         top=git('rev-parse','--show-toplevel').decode().strip()

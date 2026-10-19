@@ -1,11 +1,18 @@
-# Tutorial engineering companion
+# Tutorial: local model to cloud API
 
 **Deploy an Open-Weight AI Model to the Cloud and Serve It Through an API**
 
-The tutorial follows six phases: explain model/engine/compute/API responsibilities; run local Qwen through Unsloth; verify remote CPU and T4 access; deploy vLLM; call and test the authenticated API; inspect app usage and stop the deployment.
+My tutorial follows six phases:
 
-Start with the [deployment runbook](../getting-started.md) for exact commands. Cloud checks require explicit approval and `--allow-cloud`; deployment is a separate deliberate CLI action. Nothing in the tutorial requires automatic deployment or paid CI.
+1. Explain model weights, inference engines, compute and API servers.
+2. Run Qwen GGUF locally with Unsloth and call it from Python.
+3. Verify remote CPU execution and T4 GPU access.
+4. Deploy Qwen with vLLM on Modal.
+5. Call the authenticated cloud API and test credential rejection.
+6. Inspect resource usage and stop the deployment.
 
-The progressive drawings have seven sections and 26 reveal states: component roles, local API, cloud API, authentication, readiness, economics and recap. This engineering release contains the [seven final diagram states and editable sources](../architecture/README.md). The current recording guide, full reveal master, presentation and three marketing scripts live in the canonical Domain Intelligence Content Library under `youtube/domainos-managed-inference`.
+The [deployment guide](../getting-started.md) contains the commands. Cloud checks use `--allow-cloud` because requests can activate billed compute.
 
-Historical responses and costs are documented in the [experiment report](../experiment-report.md). A future recorded run uses its actual results and date. No inference screenshots or recordings are included in this release.
+The drawings use seven sections and 26 progressive reveal states. This repository includes the [final diagram states, editable sources and renderer](../architecture/README.md). I keep the complete presentation, recording guide and three marketing-video scripts in my Domain Intelligence Content Library under `youtube/domainos-managed-inference`.
+
+The [experiment report](../experiment-report.md) and [screenshots](../../evidence/README.md) accompany the walkthrough.

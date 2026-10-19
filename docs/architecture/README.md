@@ -1,16 +1,18 @@
-# Handwritten architecture snapshots
+# Handwritten architecture diagrams
 
-The diagrams use the same Virgil handwriting, rough orange connectors, neutral charcoal previews and 28% presenter-safe layout as the tutorial. Each `.excalidraw` scene has editable light-source objects; `*-light.svg` and dark SVGs are separate exports.
+I use Virgil handwriting, rough orange connectors, warm text and charcoal previews, with 28% of the canvas reserved for the presenter. The `.excalidraw` files contain editable objects on a light-source palette; the dark and light SVGs provide recording previews.
 
-`architecture.svg` and `architecture.excalidraw` are the cloud overview aliases used by the README. The other named files cover roles, local serving, authentication, readiness, economics and the recap. `spec.json` contains the reviewed final states; `source-manifest.json` identifies the canonical production section and output hashes. The full 26-reveal tutorial master lives in the user's canonical content library.
+The diagrams cover component roles, local serving, cloud serving, authentication, readiness, economics and the recap. `architecture.svg` and `architecture.excalidraw` are the cloud-overview aliases used by the README.
 
-## Rebuild locally
+`spec.json` contains the final diagram states. `source-manifest.json` records their hashes and source sections. The complete 26-state presentation lives in my tutorial library.
+
+## Rebuild
 
 ```sh
 npm ci --prefix docs/architecture/renderer
 python3 docs/architecture/build.py --output /tmp/domainos-architecture-rebuild
 ```
 
-Choose a new output directory on later runs. The build uses local Node packages and makes no cloud inference requests. It produces full-size preview scenes and exports under that directory. Virgil's original license is retained under `renderer/fonts/`. No project-wide open-source license has been selected.
+Use a fresh output directory for each revision. The renderer produces editable scenes, SVG previews and PNGs. It uses Rough.js and outlined Virgil glyphs; the font license is included in `renderer/fonts/`.
 
-All 26 production reveal exports were rendered and visually reviewed, with measured Virgil text bounds and reciprocal arrow bindings. Native Excalidraw import/edit and Light/Dark/System behavior are not yet certified: the available browser interface did not expose a working file-import control. Inspect those in the native editor before recording. These SVGs are Rough.js exports with outlined glyphs, rather than native Excalidraw pixel-identical exports.
+Open a scene in Excalidraw to edit its objects. For recording, check text fit at the intended zoom and leave the presenter area clear.

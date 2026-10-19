@@ -1,60 +1,54 @@
 {
   "experiment_date": "2026-10-19",
-  "source_conversation_id": "6ace0b0c-d87c-83ed-8c94-bb381de907dd",
-  "evidence_class": "conversation-reported; original screenshot pixels unavailable",
-  "claims": [
-    {
-      "id": "local-api",
-      "observation": "Unsloth Q4_K_M GGUF local API returned a response",
-      "source": "user continuation; original client.py configuration"
-    },
-    {
-      "id": "gpu",
-      "observation": "Remote T4 inspection succeeded",
-      "source": "user continuation; original gpu_test.py configuration"
-    },
-    {
-      "id": "direct-inference",
-      "http_status": 200,
-      "elapsed_end_to_end_seconds": 161.44,
-      "attempt": 24,
-      "attempt_cap": 30,
-      "prompt_tokens": 42,
-      "completion_tokens": 126,
-      "total_tokens": 168,
-      "source_message_id": "c5584eea-cc76-42cb-abc9-628067c612a1"
-    },
-    {
-      "id": "invalid-auth",
-      "http_status": 401,
-      "source_message_id": "b70ca234-cf52-41f3-a7b9-e5ef5322d53d"
-    },
-    {
-      "id": "app-usage",
-      "gpu_usd": 0.13,
-      "cpu_usd": 0.04,
-      "memory_usd": 0.01,
-      "total_usd": 0.18,
-      "requests": 74,
-      "successful_responses": 3,
-      "reported_errors": 71,
-      "source_message_id": "f0eea78f-9dd9-45e2-9350-d0032743a8fb"
-    },
-    {
-      "id": "stopped",
-      "observation": "User reported stopping the app",
-      "source_message_id": "32a6726b-076f-47b3-b000-040d1314bca1"
-    }
-  ],
-  "derived": {
-    "experiment_usd_per_successful_response": 0.06,
-    "meaning": "total experiment cost allocated to successful responses; not marginal generation cost"
+  "model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "cloud_dtype": "float16",
+  "serving_framework": "vLLM 0.11.2",
+  "gpu": "NVIDIA Tesla T4",
+  "local_inference": {
+    "model": "Qwen2.5-1.5B-Instruct-GGUF",
+    "quantization": "Q4_K_M",
+    "api_origin": "http://127.0.0.1:8888",
+    "evidence": "screenshots/local-api-monitor.png"
   },
-  "unmeasured": [
-    "aggregate experiment tokens",
-    "warm latency distribution",
-    "resource-active seconds",
-    "exact error-status breakdown"
+  "cloud_inference": {
+    "http_status": 200,
+    "attempt": 24,
+    "attempt_cap": 30,
+    "end_to_end_seconds": 161.44,
+    "prompt_tokens": 42,
+    "completion_tokens": 126,
+    "total_tokens": 168,
+    "evidence": "screenshots/cloud-inference-auth.png"
+  },
+  "authentication": {
+    "invalid_token_http_status": 401,
+    "evidence": "screenshots/cloud-inference-auth.png"
+  },
+  "gpu_inspection": {
+    "device": "Tesla T4",
+    "memory_mib": 15360,
+    "result": "completed",
+    "evidence": "screenshots/t4-inspection.png"
+  },
+  "costs_usd": {
+    "t4": "0.13342940",
+    "cpu": "0.03563575",
+    "memory": "0.01463212",
+    "compute_subtotal": "0.18369727",
+    "network_egress": "0.00416760",
+    "total": "0.18786487",
+    "evidence": "screenshots/resource-billing.png"
+  },
+  "application_state_after_experiment": "stopped",
+  "screenshots": [
+    "screenshots/cloud-inference-auth.png",
+    "screenshots/t4-inspection.png",
+    "screenshots/local-api-monitor.png",
+    "screenshots/resource-billing.png"
   ],
-  "screenshots_included": []
+  "app_requests": {
+    "total": 74,
+    "successful_responses": 3,
+    "errors": 71
+  }
 }

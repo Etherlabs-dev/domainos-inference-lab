@@ -3,8 +3,32 @@
     {
       "path": "docs/architecture/renderer/fonts/Virgil.woff2",
       "sha256": "2279cf7daf1c42a3a53b2c1437ad72f0050efb67ac263e0245f67612fd766714",
-      "review": "Known Virgil font, byte-matched against the existing tutorial source; font license inspected and included.",
+      "review": "Virgil font byte-matched to the tutorial source; license included.",
       "source": "Canonical tutorial-slides font"
+    },
+    {
+      "path": "evidence/screenshots/cloud-inference-auth.png",
+      "sha256": "8c35586e1ebda2136544ad07128ed5506690bf808e8039b2b5a4584fdd5372b5",
+      "review": "Original and export inspected; exact crop/opaque masks verified; metadata removed; local OCR privacy check passed.",
+      "source": "screenshots/manifest.json"
+    },
+    {
+      "path": "evidence/screenshots/resource-billing.png",
+      "sha256": "229a49f6188313396228a436e45f38848c35d314cef2466b905f9972c7b91c42",
+      "review": "Original and export inspected; exact crop/opaque masks verified; metadata removed; local OCR privacy check passed.",
+      "source": "screenshots/manifest.json"
+    },
+    {
+      "path": "evidence/screenshots/t4-inspection.png",
+      "sha256": "407e889e522e224e52941d13c759be0ae77ca8c728e0dfb811daf0575076a710",
+      "review": "Original and export inspected; exact crop/opaque masks verified; metadata removed; local OCR privacy check passed.",
+      "source": "screenshots/manifest.json"
+    },
+    {
+      "path": "evidence/screenshots/local-api-monitor.png",
+      "sha256": "7005402c6acfd41c253489180f330b269704394906f2c3b1364da537c3c533c4",
+      "review": "Original and export inspected; exact crop/opaque masks verified; metadata removed; local OCR privacy check passed.",
+      "source": "screenshots/manifest.json"
     }
   ]
 }

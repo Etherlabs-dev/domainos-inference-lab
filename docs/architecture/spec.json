@@ -342,7 +342,7 @@
       "key": "05-readiness-04",
       "title": "Cold start and generation are different",
       "state": "04 / Submit generation once",
-      "cue": "The packaged client sends one chat request and does not automatically retry it.",
+      "cue": "The client submits one chat request and leaves any further submission to the caller.",
       "elements": [
         {
           "type": "card",

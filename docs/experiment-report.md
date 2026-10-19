@@ -1,59 +1,74 @@
-# Experiment report · DomainOS inference lab
+# Experiment report
 
-Experiment date: 19 October 2026. Packaging date: 19 October 2026.
+**Date:** 19 October 2026
 
-## Outcome
+**Stack:** Unsloth, Python, Modal, NVIDIA T4, vLLM and Qwen2.5-1.5B-Instruct
 
-The local Unsloth API returned a model response. Modal provisioned a remote T4, and vLLM served Qwen2.5-1.5B-Instruct through an authenticated HTTPS API. A direct Python request returned HTTP 200 and token usage. A deliberately invalid Proxy Token returned HTTP 401. The application recorded $0.18 in compute usage, and the user reported stopping it.
+I started with a local Qwen GGUF model and finished with an authenticated cloud inference endpoint. The Python client returned a model response with HTTP 200, the invalid-token test returned HTTP 401, and I captured the resource costs before stopping the application.
 
-## Evidence basis
+## 1. Local inference
 
-The code was inspected directly. Historical outcomes were recovered from the referenced “Compare AI Core Services” conversation and the user's supplied continuation summary. The conversation reader returns attachment notices, not the image files. Consequently these are conversation-reported measurements, not a new screenshot audit or a rerun. [Evidence index](../evidence/README.md) and [structured results](../evidence/results.json) retain the distinction.
+I loaded Qwen2.5-1.5B-Instruct in Q4_K_M GGUF format through Unsloth and enabled its OpenAI-compatible API at `http://127.0.0.1:8888/v1`. The API monitor shows the loaded model, ready status, a completed request and zero errors in the displayed window.
 
-| Observation | Measurement | Provenance |
-| --- | --- | --- |
-| Local model/API | Q4_K_M GGUF through Unsloth; response succeeded | User continuation; original `client.py` model ID and loopback route |
-| Remote GPU | T4 inspection succeeded | User continuation; original `gpu_test.py` |
-| Cloud model | Qwen2.5-1.5B-Instruct | Original `qwen_vllm.py` |
-| Valid direct request | HTTP 200 | Lab 5 conversation summary |
-| Example timing | 161.44 seconds end to end; success on attempt 24 of 30 | Lab 5 conversation summary |
-| Example usage | 42 prompt, 126 completion, 168 total tokens | Lab 5 conversation summary |
-| Invalid authentication | HTTP 401 | Lab 6.1 conversation summary |
-| App requests | 74 total; 3 successful; 71 errors | Lab 6.2 conversation summary |
-| App resource usage | T4 $0.13 + CPU $0.04 + memory $0.01 = $0.18 | Lab 6.2 conversation summary |
-| Stopped app | User reported stopped | User's final experiment message |
+![Local Qwen model and API monitor](../evidence/screenshots/local-api-monitor.png)
 
-## Measured economics
+The local Python client sent chat-completion requests independently of the Unsloth chat interface.
 
-| Resource | Recorded USD | Share of rounded total |
-| --- | ---: | ---: |
-| T4 GPU | 0.13 | 72.22% |
-| CPU | 0.04 | 22.22% |
-| Memory | 0.01 | 5.56% |
-| Total | **0.18** | **100%** |
+## 2. Cloud GPU
 
-Allocating the entire experiment to its three successful responses gives **$0.18 / 3 = $0.06 per successful response**. This includes startup, readiness traffic, idle/runtime overhead and testing. It is an experiment allocation, not the marginal cost of generating a response or a service price.
+I verified remote GPU access with `nvidia-smi`. The worker identified an NVIDIA Tesla T4 with 15360 MiB of GPU memory and completed the inspection.
 
-The 168-token observation belongs to one response. Total experiment tokens and resource-active seconds were not captured in the accessible evidence, so a cost-per-1,000-token figure cannot be calculated from this record. Dividing the full $0.18 by those 168 tokens would mix incompatible measurement windows. Account credit balances are kept out of public material.
+![Remote T4 inspection](../evidence/screenshots/t4-inspection.png)
 
-## Readiness and error interpretation
+## 3. Cloud inference and authentication
 
-The direct client retried chat requests on 503 during startup. One successful request took 161.44 seconds across 24 attempts. The dashboard recorded 71 errors across the whole experiment. Repeated startup/readiness 503s are a plausible major contributor, consistent with the original scripts and Modal's server behavior; the accessible record does not contain a request-by-request breakdown. Do not label the 71 errors as failed generations or publish a generation success rate from this count.
+I deployed `Qwen/Qwen2.5-1.5B-Instruct` in float16 with vLLM 0.11.2. The server used the API alias `domainos-qwen` and Modal Proxy Token authentication.
 
-The new client makes readiness probes separately and sends one chat request. Its elapsed reporting distinguishes readiness waiting from the completion request. The completion timer still includes HTTP transport and server processing; it is not pure model decode time or time to first token.
+| Measurement | Result |
+| --- | --- |
+| Authenticated chat completion | HTTP 200 |
+| Successful attempt | 24 of 30 |
+| Prompt tokens | 42 |
+| Completion tokens | 126 |
+| Total tokens | 168 |
+| End-to-end elapsed time | 161.44 seconds |
+| Invalid-token test | HTTP 401; rejected |
 
-## Generated-answer quality
+![Cloud response and invalid-token test](../evidence/screenshots/cloud-inference-auth.png)
 
-The original DomainOS prompt elicited an inaccurate description involving edge devices. That response demonstrated serving, while also showing the need to supply authoritative product context and evaluate factual answers. The updated default demonstration prompt asks for a generic explanation of inference and should not be compared as a quality improvement against the original prompt.
+The app dashboard recorded 74 requests: three successful responses and 71 errors. The elapsed time above includes startup waiting and repeated HTTP 503 responses. The current client separates readiness probes from generation: it polls `/v1/models` when `--wait-ready` is selected, then sends one chat request.
 
-## Lab 7 changes and validation
+## 4. Resource costs
 
-Shared standard-library HTTP code replaces duplicate scripts. It validates endpoint origins, blocks redirects, avoids raw error-body output, limits response size and returns failing status for unexpected results. Authentication checks now include missing and invalid credentials plus a valid-key positive control. Remote CPU/GPU entrypoints require explicit opt-in. Original scripts and their hashes are preserved privately.
+The hourly billing capture contains two intervals for the inference app. I summed those rows by resource:
 
-The offline regression suite uses loopback HTTP and mocked readiness clocks. See [validation record](validation.md) for actual results. The modified client and shutdown handling were validated locally; the historical cloud results belong to the original scripts. No cloud workload was launched during packaging.
+| Resource | USD |
+| --- | ---: |
+| NVIDIA T4 | 0.13342940 |
+| CPU | 0.03563575 |
+| Memory | 0.01463212 |
+| **Compute subtotal** | **0.18369727** |
+| Network egress | 0.00416760 |
+| **Total** | **0.18786487** |
 
-## Next measurement, after separate approval
+Compute rounded to **$0.18**. Including network egress, the captured billing rows rounded to **$0.19**.
 
-Use an agreed spending cap and one serialized session. Record the first cold readiness interval, then a fixed number of warm requests using an identical prompt and token cap. Capture timestamps, HTTP status classes, prompt/completion tokens, completion-request duration and resource-active time. Export app-level usage for exactly that window and stop the app immediately afterward.
+![Hourly resource billing](../evidence/screenshots/resource-billing.png)
 
-Calculate warm-request latency percentiles only after sufficient requests. Report cold start separately. Compute `matched compute USD / matched total tokens × 1000`, alongside startup overhead and idle capacity cost. Quote any commercial rate only after adding support, storage, monitoring, network and operating margin to a representative workload model.
+The [billing rows](../evidence/billing-rows.csv) and [resource totals](../evidence/economics.csv) preserve the calculation. The earlier rounded compute breakdown was T4 $0.13, CPU $0.04 and memory $0.01.
+
+Across the experiment's three successful responses, the compute subtotal allocates about **$0.06 per successful response**, including startup and testing overhead. The 168-token measurement above belongs to the single captured response.
+
+## 5. Engineering lessons
+
+**Cold starts affected the first response.** Scaling to zero after 30 idle seconds reduced idle capacity and introduced startup waiting. Readiness and completion-request duration now have separate timers.
+
+**Serving and factual grounding are separate responsibilities.** The captured answer incorrectly described DomainOS as an edge-device platform. I changed the default demo prompt to a generic inference question and identified authoritative context plus factual evaluation as the next application layer.
+
+**Authentication needs a positive control.** The security script checks missing and invalid credentials, then confirms that valid credentials reach the expected model.
+
+**Usage needs a matching measurement window.** The resource bill covers startup and test traffic. A warm-workload benchmark should match its request timestamps, token counts and resource charges.
+
+## Code and tests
+
+I consolidated the HTTP logic, bounded readiness polling, blocked redirects, capped response size, kept credentials in hidden prompts or environment variables, and added failing exit statuses for unexpected results. The regression suite contains 33 passing tests. See the [validation record](validation.md).

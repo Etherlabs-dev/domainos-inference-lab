@@ -174,3 +174,14 @@ class LocalAuthTests(unittest.TestCase):
     def test_unexpected_local_failure_fails(self):
         with patch.object(sys,'argv',['auth_test.py']),patch.object(lab_cli,'completion',side_effect=h.StatusError(500)),contextlib.redirect_stdout(io.StringIO()):
             self.assertEqual(lab_cli.run_local_security(),1)
+
+
+class ReviewedAssetTests(unittest.TestCase):
+    def test_reviewed_binary_requires_exact_hash(self):
+        import hashlib
+        AuditTests.setUpClass()
+        audit=AuditTests.audit
+        raw=b"\xffreviewed-image-fixture"
+        with patch.object(audit,'REVIEWED_ASSET_HASHES',{hashlib.sha256(raw).hexdigest()}):
+            self.assertEqual(audit.scan('reviewed.png',raw),[])
+            self.assertEqual(audit.scan('changed.png',raw+b'x')[0]['kind'],'binary_requires_manual_review')

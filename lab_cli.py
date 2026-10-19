@@ -20,7 +20,7 @@ def run_cloud(mode="chat"):
         parser.add_argument("--readiness-seconds", type=float, default=300)
     args = parser.parse_args()
     if not args.allow_cloud:
-        parser.error("Cloud traffic is disabled. Use --allow-cloud only for an approved live run.")
+        parser.error("Cloud traffic is disabled. Add --allow-cloud to send requests.")
     try:
         base = endpoint()
         if mode == "security":

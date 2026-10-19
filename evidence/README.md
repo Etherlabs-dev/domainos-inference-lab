@@ -1,33 +1,24 @@
-# Evidence and screenshot provenance
+# Experiment evidence
 
-`results.json` contains historical observations with per-claim source IDs and evidence classes. `economics.csv` records the app's rounded compute totals. These files are transcriptions of accessible conversation results, not raw logs or dashboard exports.
+These four screenshots cover the local API, remote GPU, cloud response, authentication rejection and resource costs from my 19 October 2026 experiment.
 
-## Attachment access
+| Screenshot | Result shown |
+| --- | --- |
+| [Cloud inference and authentication](screenshots/cloud-inference-auth.png) | HTTP 200, 42/126/168 tokens, 161.44 seconds and invalid-token HTTP 401 |
+| [T4 inspection](screenshots/t4-inspection.png) | NVIDIA Tesla T4 and completed GPU inspection |
+| [Local API monitor](screenshots/local-api-monitor.png) | Q4_K_M model loaded, API ready and a completed local request |
+| [Resource billing](screenshots/resource-billing.png) | Hourly T4, CPU, memory and network-egress charges |
 
-The referenced conversation was read through the supported conversation reader. Its returned page had no older cursor. Image messages were returned as notices such as “User attached 5 images; image contents were not included.” No screenshot pixels or downloadable attachment paths were exposed. No screenshots were present in the lab directory. Earlier attachments in the full conversation could not be inspected. **No conversation screenshot has been included in this public package.**
+## Measurements
 
-The exact retrieved conversation response, original file SHA256 inventory and credential findings are preserved under ignored `.private/`; that directory must never be uploaded. Original code is separate from the revised working files.
+- [Structured results](results.json)
+- [Hourly billing rows](billing-rows.csv)
+- [Resource totals](economics.csv)
+- [Screenshot manifest](screenshots/manifest.json)
+- [Experiment report](../docs/experiment-report.md)
 
-## Screenshots to supply for a visual evidence edition
+## Image preparation
 
-| Priority | Image | Retain only |
-| --- | --- | --- |
-| 1 | Successful direct cloud response | HTTP 200, generated response, 42/126/168 token usage and 161.44s if visible |
-| 1 | Invalid-token test | Deliberately fake input label, HTTP 401, PASS line |
-| 1 | App usage resource breakdown | $0.18 app cost and $0.13/$0.04/$0.01 resource rows |
-| 2 | T4 / deployment view | GPU type, app role and running-state evidence |
-| 2 | Local Unsloth response/API monitoring | Model format, successful request/response |
+I kept the originals unchanged and selected tight crops around the results. Published copies remove application chrome, personal prompts, paths, account details and identifiers. Remaining sensitive regions use solid opaque masks. The PNG exports contain the original retained pixels and have their metadata removed.
 
-Supply the original attached images, ideally all of them, so each selected crop can be checked in context. Do not recreate terminal outputs or substitute screenshots of this report as execution evidence.
-
-## Sanitization procedure
-
-1. Store originals under `.private/raw-evidence/` and record SHA256, byte count, source message ID and capture date when known. Never edit the original.
-2. Inspect the complete original at full resolution before selecting it. Omit an image if its sensitive content cannot be isolated reliably.
-3. Crop to the evidence-bearing panel. Remove browser chrome, profiles, workspace/account names, usernames, home paths, notification banners, sidebars, personal tabs, balances, payment details, account IDs and token-bearing URLs.
-4. Use solid opaque masks for any residual credentials, secrets, API keys, endpoint identities, signed links or personal identifiers. Do not use blur or translucent overlays. Keep the experiment's $0.18 resource cost; remove account balances and payment data.
-5. Flatten into a fresh PNG, remove metadata and inspect the actual exported file at normal and enlarged zoom. Run OCR as a second check, then inspect visually again. Verify each output against its original and the disclosure list.
-6. Add only reviewed exports to `evidence/screenshots/`. Record source hash, output hash, crop/mask description, reviewer and review outcome in a manifest. Replace “conversation-reported” labels only for claims directly verified against the supplied pixels.
-7. Review the final Git diff/export, rendered README, video frames and captions. Do not publish raw logs, shell history, raw screenshots or private provenance files.
-
-No sanitization or screenshot review is claimed until that export-and-inspection process is complete.
+The manifest records the source and export hashes, crop coordinates and masked regions. I reviewed every export visually and with local OCR before publication.
