@@ -1,0 +1,5 @@
+resource,recorded_usd,evidence_class
+T4 GPU,0.13,conversation-reported
+CPU,0.04,conversation-reported
+Memory,0.01,conversation-reported
+Total,0.18,conversation-reported

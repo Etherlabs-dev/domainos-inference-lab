@@ -1,0 +1,133 @@
+{
+  "source_home": "Domain Intelligence Content Library / youtube/domainos-managed-inference",
+  "snapshot_date": "2026-10-19",
+  "purpose": "Reviewed final-state distribution copies; full production masters remain in the canonical library.",
+  "files": [
+    {
+      "path": "roles.svg",
+      "source_section": "stages/01-roles/deck.json",
+      "source_state": "01-roles-04",
+      "sha256": "79b546c4cd3a6bc2c4f26f2e9dd686fd932d710e32217ef8d5e432b3f1dec785"
+    },
+    {
+      "path": "roles-light.svg",
+      "source_section": "stages/01-roles/deck.json",
+      "source_state": "01-roles-04",
+      "sha256": "c4510e7413b57d678ab04220bbc9e32dbab453daf5b6360522a51a1e0ae615db"
+    },
+    {
+      "path": "roles.excalidraw",
+      "source_section": "stages/01-roles/deck.json",
+      "source_state": "01-roles-04",
+      "sha256": "ed68489417911b835119efee2741e3d5f7c9dc3035dee3af50630ffb31220972"
+    },
+    {
+      "path": "local.svg",
+      "source_section": "stages/02-local/deck.json",
+      "source_state": "02-local-04",
+      "sha256": "9a02b67e40219b09808914b0cc0e5ca1c14c7e735fed2776c3164be857bf19aa"
+    },
+    {
+      "path": "local-light.svg",
+      "source_section": "stages/02-local/deck.json",
+      "source_state": "02-local-04",
+      "sha256": "530472c415b49e990cd92985471886e54eafd073cfb22b986c21cfa511dfaeec"
+    },
+    {
+      "path": "local.excalidraw",
+      "source_section": "stages/02-local/deck.json",
+      "source_state": "02-local-04",
+      "sha256": "ee27d423b59a8c98333d9e53f44b86c45f6d17dd3d54c62dd4c6b20c6694b3bc"
+    },
+    {
+      "path": "cloud.svg",
+      "source_section": "stages/03-cloud/deck.json",
+      "source_state": "03-cloud-04",
+      "sha256": "50aae026c4d0bf0fe93651448211c4da2cdfc19eeee2b040527caec87ece1fb1"
+    },
+    {
+      "path": "cloud-light.svg",
+      "source_section": "stages/03-cloud/deck.json",
+      "source_state": "03-cloud-04",
+      "sha256": "e7c3d5f75ce16a72e76ba6b63cacbaaab65bdc988edf0a1a5330904efb8c87b4"
+    },
+    {
+      "path": "cloud.excalidraw",
+      "source_section": "stages/03-cloud/deck.json",
+      "source_state": "03-cloud-04",
+      "sha256": "e188b29f02c86bed06e1979cedfb00822bb2fb0d5eab4cf8b8aa79eea8e2a605"
+    },
+    {
+      "path": "auth.svg",
+      "source_section": "stages/04-auth/deck.json",
+      "source_state": "04-auth-04",
+      "sha256": "2a9ab2b941ed0d8c765fca77faf9e2841323defb42d136bb9599fab7833b166c"
+    },
+    {
+      "path": "auth-light.svg",
+      "source_section": "stages/04-auth/deck.json",
+      "source_state": "04-auth-04",
+      "sha256": "ce777c2f504c465d9bd953b39730a76aacafc72dd72ddb78014a9fd01a6d11a4"
+    },
+    {
+      "path": "auth.excalidraw",
+      "source_section": "stages/04-auth/deck.json",
+      "source_state": "04-auth-04",
+      "sha256": "2e920330aa8fd969fd7b374e84fae43339145921d93cec1bb67d7d9099eaa819"
+    },
+    {
+      "path": "readiness.svg",
+      "source_section": "stages/05-readiness/deck.json",
+      "source_state": "05-readiness-04",
+      "sha256": "a8f6f63883837e26f2718ac5e511227f28218d4dc195a63a1104df8f67777e2d"
+    },
+    {
+      "path": "readiness-light.svg",
+      "source_section": "stages/05-readiness/deck.json",
+      "source_state": "05-readiness-04",
+      "sha256": "75029de27e421a30955c99011fbf8287af20e8d96d4e8f5eaa58039257cc19db"
+    },
+    {
+      "path": "readiness.excalidraw",
+      "source_section": "stages/05-readiness/deck.json",
+      "source_state": "05-readiness-04",
+      "sha256": "43d1223beb5ecf4884ba438bcb5718a157a68cbcbf695504e0dac5d4d6af3a77"
+    },
+    {
+      "path": "economics.svg",
+      "source_section": "stages/06-economics/deck.json",
+      "source_state": "06-economics-03",
+      "sha256": "c602f4cf2bbed64d2929aeb4b85b3b1ba5fce169250adba8df02c7d7d66e1165"
+    },
+    {
+      "path": "economics-light.svg",
+      "source_section": "stages/06-economics/deck.json",
+      "source_state": "06-economics-03",
+      "sha256": "cd23c1b4330a68ec22a96a53386e7624cb5aeb08666cb5a2f2ee5408685b8ab1"
+    },
+    {
+      "path": "economics.excalidraw",
+      "source_section": "stages/06-economics/deck.json",
+      "source_state": "06-economics-03",
+      "sha256": "51234c44730596a6f2514a15c203b17af645b4ac6231e5062e0d500e36dff986"
+    },
+    {
+      "path": "recap.svg",
+      "source_section": "stages/07-recap/deck.json",
+      "source_state": "07-recap-03",
+      "sha256": "9a577b7304cbbf5f49591586db9f04cf86c6d6474e8c8d050bc6bc8225ccee88"
+    },
+    {
+      "path": "recap-light.svg",
+      "source_section": "stages/07-recap/deck.json",
+      "source_state": "07-recap-03",
+      "sha256": "4ff84932260adf37834015d377e73d762b5debfff78da6ee05feb16b2d4f313f"
+    },
+    {
+      "path": "recap.excalidraw",
+      "source_section": "stages/07-recap/deck.json",
+      "source_state": "07-recap-03",
+      "sha256": "72c946758827cf158fa38627400726c9bcbd7723b6b7e36cf84618cb86d2249b"
+    }
+  ]
+}

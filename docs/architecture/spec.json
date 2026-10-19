@@ -1,0 +1,541 @@
+{
+  "title": "DomainOS inference architecture snapshots",
+  "brand": "INTELLIGENCE FROM ZERO",
+  "slides": [
+    {
+      "key": "01-roles-04",
+      "title": "A model becomes a service",
+      "state": "04 / Add the API",
+      "cue": "The API accepts requests and returns model outputs to another application.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "weights",
+          "text": "Model weights",
+          "x": 102,
+          "y": 325,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Qwen \u00b7 learned parameters"
+        },
+        {
+          "type": "card",
+          "id": "engine",
+          "text": "Inference engine",
+          "x": 790,
+          "y": 325,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Executes the model"
+        },
+        {
+          "type": "card",
+          "id": "compute",
+          "text": "Compute",
+          "x": 102,
+          "y": 610,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Laptop or NVIDIA T4"
+        },
+        {
+          "type": "card",
+          "id": "api",
+          "text": "API server",
+          "x": 790,
+          "y": 610,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Software calls the model"
+        }
+      ],
+      "note": "Four roles. One inference service."
+    },
+    {
+      "key": "02-local-04",
+      "title": "Call a local model from Python",
+      "state": "04 / Return the response",
+      "cue": "Text and usage travel back through the local API to Python.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "client",
+          "text": "Python app",
+          "x": 102,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "client.py"
+        },
+        {
+          "type": "card",
+          "id": "api",
+          "text": "Local API",
+          "x": 542,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "Loopback :8888"
+        },
+        {
+          "type": "arrow",
+          "from": "client",
+          "to": "api"
+        },
+        {
+          "type": "card",
+          "id": "runtime",
+          "text": "Unsloth runtime",
+          "x": 982,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "Local inference"
+        },
+        {
+          "type": "arrow",
+          "from": "api",
+          "to": "runtime"
+        },
+        {
+          "type": "card",
+          "id": "model",
+          "text": "Qwen model",
+          "x": 982,
+          "y": 640,
+          "width": 350,
+          "height": 160,
+          "color": "accent",
+          "sub": "GGUF \u00b7 Q4_K_M"
+        },
+        {
+          "type": "arrow",
+          "from": "runtime",
+          "to": "model"
+        },
+        {
+          "type": "arrow",
+          "from": "model",
+          "to": "client",
+          "route": [
+            [
+              970,
+              720
+            ],
+            [
+              277,
+              720
+            ],
+            [
+              277,
+              527
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Generated text + usage",
+          "x": 102,
+          "y": 780,
+          "width": 780,
+          "size": 30,
+          "color": "ink"
+        }
+      ],
+      "note": "Return arrow summarizes the reply over the same API path."
+    },
+    {
+      "key": "03-cloud-04",
+      "title": "Serve Qwen through a cloud API",
+      "state": "04 / Return text and usage",
+      "cue": "The server returns a chat completion and token counts.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "client",
+          "text": "Python app",
+          "x": 102,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "cloud_client.py"
+        },
+        {
+          "type": "card",
+          "id": "proxy",
+          "text": "Modal proxy",
+          "x": 542,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "HTTPS + Proxy Token"
+        },
+        {
+          "type": "arrow",
+          "from": "client",
+          "to": "proxy"
+        },
+        {
+          "type": "card",
+          "id": "vllm",
+          "text": "vLLM server",
+          "x": 982,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "NVIDIA T4 on Modal"
+        },
+        {
+          "type": "arrow",
+          "from": "proxy",
+          "to": "vllm"
+        },
+        {
+          "type": "card",
+          "id": "model",
+          "text": "Qwen model",
+          "x": 982,
+          "y": 640,
+          "width": 350,
+          "height": 160,
+          "color": "accent",
+          "sub": "HF weights \u00b7 float16"
+        },
+        {
+          "type": "arrow",
+          "from": "vllm",
+          "to": "model"
+        },
+        {
+          "type": "arrow",
+          "from": "model",
+          "to": "client",
+          "route": [
+            [
+              970,
+              720
+            ],
+            [
+              277,
+              720
+            ],
+            [
+              277,
+              527
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": "JSON response + token usage",
+          "x": 102,
+          "y": 780,
+          "width": 850,
+          "size": 30,
+          "color": "ink"
+        }
+      ],
+      "note": "Return arrow summarizes the reply over the same HTTPS path."
+    },
+    {
+      "key": "04-auth-04",
+      "title": "Test both sides of authentication",
+      "state": "04 / Credential scope",
+      "cue": "This lab uses a workspace/environment Proxy Token. Customer-scoped authorization is a separate layer.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "client",
+          "text": "Client request",
+          "x": 102,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "Credentials supplied"
+        },
+        {
+          "type": "card",
+          "id": "proxy",
+          "text": "Modal proxy",
+          "x": 542,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "Access check"
+        },
+        {
+          "type": "arrow",
+          "from": "client",
+          "to": "proxy"
+        },
+        {
+          "type": "card",
+          "id": "reject",
+          "text": "Reject request",
+          "x": 982,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "data",
+          "sub": "HTTP 401 / 403"
+        },
+        {
+          "type": "arrow",
+          "from": "proxy",
+          "to": "reject"
+        },
+        {
+          "type": "card",
+          "id": "accept",
+          "text": "Forward request",
+          "x": 982,
+          "y": 640,
+          "width": 350,
+          "height": 160,
+          "color": "accent",
+          "sub": "Valid-key control"
+        },
+        {
+          "type": "arrow",
+          "from": "proxy",
+          "to": "accept",
+          "route": [
+            [
+              717,
+              527
+            ],
+            [
+              717,
+              720
+            ],
+            [
+              970,
+              720
+            ]
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Lab access control",
+          "x": 102,
+          "y": 680,
+          "width": 620,
+          "size": 34,
+          "color": "ink"
+        }
+      ],
+      "note": "Keep dedicated lab credentials private; revoke after use."
+    },
+    {
+      "key": "05-readiness-04",
+      "title": "Cold start and generation are different",
+      "state": "04 / Submit generation once",
+      "cue": "The packaged client sends one chat request and does not automatically retry it.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "get",
+          "text": "GET /v1/models",
+          "x": 102,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "Readiness probe"
+        },
+        {
+          "type": "card",
+          "id": "load",
+          "text": "Start + load",
+          "x": 542,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "503 while unavailable"
+        },
+        {
+          "type": "arrow",
+          "from": "get",
+          "to": "load"
+        },
+        {
+          "type": "card",
+          "id": "ready",
+          "text": "Model ready",
+          "x": 982,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "accent",
+          "sub": "200 + expected ID"
+        },
+        {
+          "type": "arrow",
+          "from": "load",
+          "to": "ready"
+        },
+        {
+          "type": "card",
+          "id": "post",
+          "text": "POST chat once",
+          "x": 982,
+          "y": 640,
+          "width": 350,
+          "height": 160,
+          "color": "accent",
+          "sub": "Generate response"
+        },
+        {
+          "type": "arrow",
+          "from": "ready",
+          "to": "post"
+        },
+        {
+          "type": "text",
+          "text": "Wait, then generate",
+          "x": 102,
+          "y": 680,
+          "width": 680,
+          "size": 34,
+          "color": "ink"
+        },
+        {
+          "type": "text",
+          "text": "Bounded 503 polling",
+          "x": 102,
+          "y": 745,
+          "width": 680,
+          "size": 30,
+          "color": "ink"
+        }
+      ],
+      "note": "After a timeout, inspect logs before a manual resubmission."
+    },
+    {
+      "key": "06-economics-03",
+      "title": "Measure the experiment cost",
+      "state": "03 / Interpret the total",
+      "cue": "Eighteen cents across three successful responses is six cents allocated to each. Startup and testing are included.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "gpu",
+          "text": "T4 GPU",
+          "x": 102,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "data",
+          "sub": "$0.13"
+        },
+        {
+          "type": "card",
+          "id": "cpu",
+          "text": "CPU",
+          "x": 542,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "data",
+          "sub": "$0.04"
+        },
+        {
+          "type": "card",
+          "id": "memory",
+          "text": "Memory",
+          "x": 982,
+          "y": 345,
+          "width": 350,
+          "height": 170,
+          "color": "data",
+          "sub": "$0.01"
+        },
+        {
+          "type": "text",
+          "text": "$0.18 experiment compute",
+          "x": 102,
+          "y": 625,
+          "width": 1200,
+          "size": 44,
+          "color": "accent"
+        },
+        {
+          "type": "text",
+          "text": "$0.06 per successful response = full experiment allocation",
+          "x": 102,
+          "y": 720,
+          "width": 1250,
+          "size": 28,
+          "color": "ink"
+        }
+      ],
+      "note": "An experiment allocation, not marginal generation cost or a price."
+    },
+    {
+      "key": "07-recap-03",
+      "title": "What the lab demonstrates",
+      "state": "03 / A measurable service",
+      "cue": "Access checks, usage visibility and stop controls complete the lab story.",
+      "elements": [
+        {
+          "type": "card",
+          "id": "local",
+          "text": "Local API",
+          "x": 102,
+          "y": 325,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Q4_K_M GGUF + Python"
+        },
+        {
+          "type": "card",
+          "id": "cloud",
+          "text": "Cloud API",
+          "x": 790,
+          "y": 325,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Modal + vLLM + T4"
+        },
+        {
+          "type": "card",
+          "id": "control",
+          "text": "Access checks",
+          "x": 102,
+          "y": 610,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Valid and invalid credentials"
+        },
+        {
+          "type": "card",
+          "id": "measure",
+          "text": "Usage + control",
+          "x": 790,
+          "y": 610,
+          "width": 540,
+          "height": 170,
+          "color": "accent",
+          "sub": "Inspect usage; stop the app"
+        }
+      ],
+      "note": "Next measurement: cold startup and a matched warm workload."
+    }
+  ]
+}
