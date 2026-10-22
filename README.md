@@ -4,6 +4,14 @@
 
 I built this lab to take an open-weight model from local inference to a cloud service. I ran a Q4_K_M GGUF model through Unsloth, deployed Qwen2.5-1.5B-Instruct with vLLM on Modal, connected a Python client, tested authentication, and measured resource usage.
 
+## Video walkthrough
+
+[**Watch the complete tutorial on YouTube →**](https://youtu.be/sbAmuF1waQw)
+
+Follow the build from local Qwen inference to a GPU-backed cloud API: deployment, Python integration, readiness checks, authentication tests, token usage and compute costs.
+
+[DomainOS Managed Inference](https://ethercess.com/intelligence-os/managed-inference/) · [Setup and deployment guide](docs/getting-started.md) · [Architecture](docs/architecture.md)
+
 ![Cloud inference architecture](docs/architecture/architecture.svg)
 
 ## Results · 19 October 2026

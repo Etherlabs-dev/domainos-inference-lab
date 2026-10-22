@@ -1,5 +1,7 @@
 # Tutorial: local model to cloud API
 
+[Watch the complete recorded walkthrough on YouTube](https://youtu.be/sbAmuF1waQw).
+
 **Deploy an Open-Weight AI Model to the Cloud and Serve It Through an API**
 
 My tutorial follows six phases:
